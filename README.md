@@ -8,4 +8,4 @@ to open code :
 # once done open eclipse and open the ide for java 
  # open the project folders 
  # u r ready to edit 
-  #once u have made changes u can publich them here 
+  # once u have made changes u can publich them here 
