@@ -59,23 +59,40 @@ public class Player extends Entity {
     	if(keyH.upPressed == true || keyH.downPressed == true || keyH.leftPressed == true || keyH.rightPressed == true) {
     		if(keyH.upPressed == true){
                 dir = "up";
-                Worldy -= speed;
             }
 
             else if(keyH.downPressed == true){
-                dir = "down";
-                Worldy += speed;
+                dir = "down"; 
             }
 
             else if(keyH.leftPressed == true){
                 dir = "left";
-                Worldx -= speed;
             }
 
             else if(keyH.rightPressed == true){
                 dir = "right";
-                Worldx += speed;
             }
+    		
+    		CollisonOn = false;
+    		gp.cChecker.checkTile(this);
+    		
+    		if(CollisonOn == false) {
+    			switch(dir) {
+    			case"up":
+    				Worldy -= speed;
+    				break;
+    			case"down":
+    				Worldy += speed;
+    				break;
+    			case"left":
+    				Worldx -= speed;
+    				break;
+    			case"right":
+    				Worldx += speed;
+    				break;
+    			}
+    		}
+    		
     		 spritecounter++;
     	        if(spritecounter > 10) {
     	        	if(spritenum ==1) {
