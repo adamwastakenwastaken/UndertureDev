@@ -15,6 +15,8 @@ public class Player extends Entity {
     public final int screenX;
     public final int screenY;
 
+    int hasKey = 0;
+
     public Player(GamePanel gp, KeyHandler keyH){
         this.gp = gp;
         this.keyH = keyH;
@@ -76,6 +78,9 @@ public class Player extends Entity {
     		
     		CollisonOn = false;
     		gp.cChecker.checkTile(this);
+
+            int objIndex = gp.cChecker.checkObject(this, true);
+            pickUpObject(objIndex);
     		
     		if(CollisonOn == false) {
     			switch(dir) {
@@ -108,6 +113,33 @@ public class Player extends Entity {
     	}
        
         
+    }
+
+    public void pickUpObject(int i){
+        if(i != 999){
+            String objName = gp.obj[i].name;
+
+            switch(objName){
+                case"Key":
+                    hasKey++;
+                    gp.playSoundAffect(1);
+                    gp.obj[i] = null;
+                    break;
+                case"Door":
+                    if(hasKey > 0){
+                        gp.obj[i] = null;
+                        gp.playSoundAffect(3);
+                        hasKey--;
+                    }
+                    break;
+
+                case"Boots":
+                    speed += 2;
+                    gp.playSoundAffect(2);
+                    gp.obj[i] = null;
+                    break;    
+            }
+        }
     }
     public void draw(Graphics2D g2){
         BufferedImage img = null;

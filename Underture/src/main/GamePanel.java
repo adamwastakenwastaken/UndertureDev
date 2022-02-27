@@ -34,6 +34,8 @@ public class GamePanel extends JPanel implements Runnable {
     public AssetSetter aSetter = new AssetSetter(this);
     public SuperObject obj[] = new SuperObject[10];
     int FPS = 60;
+    Sound music = new Sound();
+    Sound soundAffect = new Sound();
 
     public GamePanel(){
         this.setPreferredSize(new Dimension(Screenwidth, screenHeight));
@@ -45,6 +47,8 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void setupGame(){
         aSetter.setObject();
+
+        playMusic(0);
     }
 
     public void startGameThread(){
@@ -99,5 +103,20 @@ public class GamePanel extends JPanel implements Runnable {
         }
         player.draw(g2);
         g2.dispose();
+    }
+
+    public void playMusic(int i){
+        music.setFile(i);
+        music.play();
+        music.loop();
+    }
+
+    public void stopMusic(){
+        music.stop();
+    }
+
+    public void playSoundAffect(int i){
+        soundAffect.setFile(i);
+        soundAffect.play();
     }
 }
